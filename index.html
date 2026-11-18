@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketing Campaign Analysis · FY2025</title>
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)" />
+  <link rel="preconnect" href="[fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin />
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600;800&display=swap)" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="stars"></canvas>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="ld-shapes"><span class="sq"></span><span class="ci"></span><span class="tr"></span></div>
+    <div class="ld-title">CAMPAIGN<b>ANALYTICS</b></div>
+    <div class="ld-bar" id="ldBar"></div>
+    <div class="ld-row"><span class="ld-msg" data-i18n="loading">Loading campaign data…</span><span id="ldPct">0%</span></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="top">
+    <div class="brand">
+      <span class="g sq"></span><span class="g ci"></span><span class="g tr"></span>
+      <span class="brand-txt">MCA<em>/25</em></span>
+    </div>
+    <div class="controls">
+      <button class="ctl lang" id="langBtn" aria-label="Language">
+        <span data-l="en">EN</span><span data-l="fr">FR</span>
+      </button>
+      <button class="ctl theme" id="themeBtn" aria-label="Theme">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><g stroke-width="2"><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/><line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/><line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/></g></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <div class="ctl accent">
+        <button class="sw" data-c="#D62828" style="background:#D62828"></button>
+        <button class="sw" data-c="#1F4E9E" style="background:#1F4E9E"></button>
+        <button class="sw" data-c="#F2B701" style="background:#F2B701"></button>
+        <label class="sw pick" title="Custom"><input type="color" id="accentPick" value="#D62828" /></label>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-txt">
+        <p class="tag" data-i18n="period">FY 2025 · 6 CHANNELS · 24 CAMPAIGNS</p>
+        <h1 data-i18n="title">Marketing Campaign Analysis</h1>
+        <p class="sub" data-i18n="subtitle">Where does each euro work hardest? ROI, conversion and engagement across every channel.</p>
+      </div>
+      <div class="hero-art"><span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span></div>
+    </section>
+
+    <!-- KPIs -->
+    <section class="kpis" id="kpis"></section>
+
+    <!-- SUMMARY -->
+    <section class="block summary">
+      <h2><span class="num">01</span><span data-i18n="sum_title">Executive summary</span></h2>
+      <ul>
+        <li data-i18n="s1"></li>
+        <li data-i18n="s2"></li>
+        <li data-i18n="s3"></li>
+      </ul>
+    </section>
+
+    <!-- CHARTS -->
+    <section class="block">
+      <h2><span class="num">02</span><span data-i18n="charts_title">Performance analysis</span></h2>
+      <div class="grid">
+        <article class="card wide"><header><h3 data-i18n="c_trend"></h3><button class="info" data-info="trend">?</button></header><div class="chart" id="cTrend"></div></article>
+        <article class="card"><header><h3 data-i18n="c_roi"></h3><button class="info" data-info="roi">?</button></header><div class="chart" id="cRoi"></div></article>
+        <article class="card"><header><h3 data-i18n="c_mix"></h3><button class="info" data-info="mix">?</button></header><div class="chart" id="cMix"></div></article>
+        <article class="card"><header><h3 data-i18n="c_funnel"></h3><button class="info" data-info="funnel">?</button></header><div class="chart" id="cFunnel"></div></article>
+        <article class="card"><header><h3 data-i18n="c_eng"></h3><button class="info" data-info="eng">?</button></header><div class="chart" id="cEng"></div></article>
+      </div>
+    </section>
+
+    <!-- PIVOT -->
+    <section class="block">
+      <h2><span class="num">03</span><span data-i18n="pivot_title">Pivot table · Channel × Quarter</span></h2>
+      <div class="pivot-bar">
+        <label data-i18n="pivot_metric">Metric</label>
+        <div class="seg" id="metricSeg">
+          <button data-m="roi" class="on" data-i18n="m_roi">ROI</button>
+          <button data-m="cvr" data-i18n="m_cvr">CVR</button>
+          <button data-m="rev" data-i18n="m_rev">Revenue</button>
+          <button data-m="cpa" data-i18n="m_cpa">CPA</button>
+        </div>
+        <button class="info" data-info="pivot">?</button>
+      </div>
+      <div class="table-wrap"><table id="pivot"></table></div>
+      <div class="legend"><span data-i18n="legend_low">Weak</span><i class="scale"></i><span data-i18n="legend_high">Strong</span></div>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section class="block">
+      <h2><span class="num">04</span><span data-i18n="reco_title">Recommendations</span></h2>
+      <div class="reco-grid">
+        <ol class="recos" id="recos"></ol>
+        <div class="sim card">
+          <header><h3 data-i18n="sim_title">Budget reallocation simulator</h3><button class="info" data-info="sim">?</button></header>
+          <label for="simRange"><span data-i18n="sim_label">Display budget moved</span> : <b id="simPct">50%</b> (<b id="simAmt"></b>)</label>
+          <input type="range" id="simRange" min="0" max="100" step="5" value="50" />
+          <div class="sim-out">
+            <div><small data-i18n="sim_rev">Projected revenue</small><strong id="simRev"></strong></div>
+            <div><small data-i18n="sim_delta">Revenue uplift</small><strong id="simDelta"></strong></div>
+            <div><small data-i18n="sim_roi">Projected ROI</small><strong id="simRoi"></strong></div>
+          </div>
+          <p class="note" data-i18n="sim_note"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- METHOD -->
+    <section class="block method">
+      <h2><span class="num">05</span><span data-i18n="method_title">Methodology</span></h2>
+      <div class="formulas">
+        <code>ROI = (Revenue − Spend) / Spend</code>
+        <code>CVR = Conversions / Clicks</code>
+        <code>CTR = Clicks / Impressions</code>
+        <code>CPA = Spend / Conversions</code>
+        <code>ROAS = Revenue / Spend</code>
+      </div>
+      <p data-i18n="method_txt"></p>
+    </section>
+  </main>
+
+  <footer class="foot"><span data-i18n="foot">Portfolio project · Fictional data · Built with HTML, CSS & vanilla JS (pure SVG)</span></footer>
+
+  <div id="tip"></div>
+
+  <div id="modal" aria-hidden="true">
+    <div class="m-box">
+      <span class="m-geo"></span>
+      <button class="m-close" id="mClose">✕</button>
+      <h3 id="mTitle"></h3>
+      <div id="mBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
